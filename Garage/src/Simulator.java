@@ -1,5 +1,5 @@
 //package Parkeersimulator;
-// voorbeeld alex
+// voorbeeld alexx
 
 import java.util.Random;
 /**
