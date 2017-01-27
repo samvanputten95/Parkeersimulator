@@ -1,5 +1,5 @@
 //package Parkeersimulator;
-
+// javadoc geadd
 public class Location {
 
     private int floor;
