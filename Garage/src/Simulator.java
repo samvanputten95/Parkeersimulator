@@ -1,5 +1,5 @@
 //package Parkeersimulator;
-// voorbeeld
+// voorbeeld zerin
 
 import java.util.Random;
 /**
