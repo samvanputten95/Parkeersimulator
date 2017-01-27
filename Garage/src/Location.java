@@ -7,7 +7,7 @@ public class Location {
     private int place;
 
     /**
-     * Constructor for objects of class Location
+     * Constructor voor objects van de klasse class Location
      */
     public Location(int floor, int row, int place) {
         this.floor = floor;
@@ -16,7 +16,7 @@ public class Location {
     }
 
     /**
-     * Implement content equality.
+     * Implementeert inhoud qua gelijkheid.
      */
     public boolean equals(Object obj) {
         if(obj instanceof Location) {
@@ -29,39 +29,38 @@ public class Location {
     }
 
     /**
-     * Return a string of the form floor,row,place.
-     * @return A string representation of the location.
+     * retouneert een string van  floor,row,place.
+     * @return Een string gemaakt om de locatie te weergeven.
      */
     public String toString() {
         return floor + "," + row + "," + place;
     }
 
     /**
-     * Use the 10 bits for each of the floor, row and place
-     * values. Except for very big car parks, this should give
-     * a unique hash code for each (floor, row, place) tupel.
-     * @return A hashcode for the location.
+     * gebrukt 10 bits voor elke floor, row and place
+     *  behalve voor grote pakeerplekken, dit geeft een unique hashcode voor (floor, row, place)
+     * @return een hashcode van de locatie.
      */
     public int hashCode() {
         return (floor << 20) + (row << 10) + place;
     }
 
     /**
-     * @return The floor.
+     * @return Retouneeert de floor.
      */
     public int getFloor() {
         return floor;
     }
 
     /**
-     * @return The row.
+     * @return Retouneeert de row.
      */
     public int getRow() {
         return row;
     }
 
     /**
-     * @return The place.
+     * @return Retouneeert de place.
      */
     public int getPlace() {
         return place;
