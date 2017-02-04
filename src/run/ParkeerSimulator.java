@@ -1,6 +1,6 @@
 package run;
 
-import model.Model;
+import model.*;
 
 public class ParkeerSimulator {
 	
@@ -9,7 +9,7 @@ public class ParkeerSimulator {
 	  public static void main(String[] args){
 		    
 	    	Model model = new Model();
-	    	model.start();
+	    	
 	    }
 	
 }
