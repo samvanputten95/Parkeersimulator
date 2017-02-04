@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 
-import Model.Simulator;
 import model.Model;
 
 public class Controller extends AbstractController {
@@ -27,7 +26,7 @@ public class Controller extends AbstractController {
 		// TODO Auto-generated method stub
 		
 		if(e.getActionCommand().equals("start")){
-			Model.simulator.startSimulator(); 
+			System.out.println("Start has been pressed");
 			model.start();
 		}
 		if(e.getActionCommand().equals("pause")){
