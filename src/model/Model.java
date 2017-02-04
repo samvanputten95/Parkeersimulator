@@ -1,7 +1,6 @@
 package model;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.util.Random;
 
 import view.MainWindow;
@@ -18,22 +17,23 @@ public class Model {
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
     private MainWindow simulatorView;
-    private boolean run;
+   
+    private boolean run = false;
     private int day = 0;
     private int hour = 0;
     private int minute = 0;
 
-    private int tickPause = 100;
+    private int tickPause = 250;
 
     int weekDayArrivals= 100; // average number of arriving cars per hour
     int weekendArrivals = 200; // average number of arriving cars per hour
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
     int weekendPassArrivals = 5; // average number of arriving cars per hour
-    int weekDayAbboArrivals = 20;
-    int weekendAbboArrivals = 3;
-    int enterSpeed = 3; // number of cars that can enter per minute
-    int paymentSpeed = 7; // number of cars that can pay per minute
-    int exitSpeed = 5; // number of cars that can leave per minute
+    int weekDayAbboArrivals = 20;//average number of arriving cars per hour
+    int weekendAbboArrivals = 3;//average number of arriving cars per hour
+    int enterSpeed = 2; // number of cars that can enter per minute
+    int paymentSpeed = 5; // number of cars that can pay per minute
+    int exitSpeed = 3; // number of cars that can leave per minute
 
   
     
@@ -46,14 +46,15 @@ public class Model {
         simulatorView = new MainWindow(3, 6, 30, this); // mogelijk naar main????? in run package?
     }
     
-    public void simulatorStart(){
-    	start();
+    public void start(){
+    	
+    	run = true;
+    	run(10000);
     }
-    
-    public void start() {
-    	run = true;  	
-        for (int i = 0; i < 10000; i++) {
-        	if(run){
+
+    public void run(int stappen) {
+        for (int i = 0; i < stappen; i++) {
+        	if(run == true){
             tick();
         	}
         	else{
