@@ -26,10 +26,16 @@ public class MainWindow implements ActionListener {
     private int numberOfPlaces;
     private int numberOfOpenSpots;
     private JFrame mainwindow; 
-    private JPanel toolbar;
     private Car[][][] cars;
     private Model model;
     private ActionEvent event;
+    
+    private JPanel buttonbar;
+    private JPanel infobar;
+    private JLabel Cars;
+    private JLabel AdHoc;
+    private JLabel Pass;
+    private JLabel Abbo;
 
     public MainWindow(int numberOfFloors, int numberOfRows, int numberOfPlaces, Model model) {
     	mainwindow=new JFrame("GarageSimulator");
@@ -47,37 +53,62 @@ public class MainWindow implements ActionListener {
         carParkView = new CarParkView(this);
 
         
-        this.toolbar = new JPanel();
-        toolbar.setLayout(new GridLayout(1, 0));
-		mainwindow.getContentPane().add(toolbar);
         
+        this.buttonbar = new JPanel();
+        buttonbar.setLayout(new GridLayout(1, 0));
+        this.infobar = new JPanel();
+        infobar.setLayout(new GridLayout(1,0));
+		mainwindow.getContentPane().add(buttonbar);
+        mainwindow.getContentPane().add(infobar);
         
         
         Container contentPane = mainwindow.getContentPane();
-        contentPane.add(carParkView, BorderLayout.CENTER);
-       
-        
         
        
-        
         JButton start = new JButton("start");
         start.addActionListener(this);
+        
         JButton step = new JButton("step");
         step.addActionListener(this);
+        
         JButton pause = new JButton("pause");
         pause.addActionListener(this);
+        
         JButton quit = new JButton("quit");
         quit.addActionListener(this);
         
+        buttonbar.add(start);
+        buttonbar.add(step);
+        buttonbar.add(pause);
+        buttonbar.add(quit);
         
-        toolbar.add(start);
-        toolbar.add(step);
-        toolbar.add(pause);
-        toolbar.add(quit);
+        Cars = new JLabel("Totaalaantal Cars");
+        Cars.setHorizontalAlignment(SwingConstants.CENTER);
+        Cars.setText(String.valueOf(model.getCars()));
         
-        JPanel flow = new JPanel();       
-        flow.add(toolbar);
-        contentPane.add(toolbar, BorderLayout.SOUTH);
+        AdHoc = new JLabel("aantal AdHocCars");
+        AdHoc.setHorizontalAlignment(SwingConstants.CENTER);
+        AdHoc.setText(String.valueOf(model.getAdHoc()));
+        
+        Pass = new JLabel("Aantal ParkingPassCars");
+        Pass.setHorizontalAlignment(SwingConstants.CENTER);
+        Pass.setText(String.valueOf(model.getPass()));
+        
+        Abbo = new JLabel("Aantal AbboCars");
+        Abbo.setHorizontalAlignment(SwingConstants.CENTER);
+        Abbo.setText(String.valueOf(model.getAbbo()));
+        
+        infobar.add(Cars);
+        infobar.add(AdHoc);
+        infobar.add(Pass);
+        infobar.add(Abbo);
+        
+        
+        JPanel flow = new JPanel(new GridLayout(0,1));       
+        flow.add(buttonbar);
+        flow.add(infobar);
+        contentPane.add(carParkView, BorderLayout.NORTH);
+        contentPane.add(flow, BorderLayout.SOUTH);
         
         mainwindow.pack();
         mainwindow.setVisible(true);
@@ -85,7 +116,8 @@ public class MainWindow implements ActionListener {
         updateView();
     }
  
-
+   
+    
     public void setActionEvent(ActionEvent e) {
         event = e;
     }
@@ -112,6 +144,7 @@ public class MainWindow implements ActionListener {
                 }
                 
                 if(command == "step") {
+                	
                 	model.step();                    
                 }
                                                    
@@ -125,6 +158,11 @@ public class MainWindow implements ActionListener {
     
     public void updateView() {
         carParkView.updateView();
+        
+        Cars.setText("Totaalaantal Cars: " + String.valueOf(model.getCars()));
+        AdHoc.setText("Aantal AdHocCars: " + String.valueOf(model.getAdHoc()));
+        Pass.setText("Aantal ParkingPassCars: " + String.valueOf(model.getPass()));
+        Abbo.setText("Aantal AbboCars: " + String.valueOf(model.getAbbo()));
     }
     
 	public int getNumberOfFloors() {
