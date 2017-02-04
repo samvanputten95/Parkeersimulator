@@ -45,7 +45,11 @@ public class Model {
         exitCarQueue = new CarQueue();
         simulatorView = new MainWindow(3, 6, 30, this); // mogelijk naar main????? in run package?
     }
-
+    
+    public void simulatorStart(){
+    	start();
+    }
+    
     public void start() {
     	run = true;  	
         for (int i = 0; i < 10000; i++) {
