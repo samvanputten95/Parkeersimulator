@@ -77,10 +77,17 @@ public class Model {
     	return aantalAbbo;
     }
     
-    public int getTime(){
+    public int getMinuut(){
     	return minute;
     }
     
+    public int getDag(){
+    	return day;
+    }
+    
+    public int getUur(){
+    	return hour;
+    }
     public void start(){
     	
     	run = true;
