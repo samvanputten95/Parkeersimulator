@@ -201,8 +201,8 @@ public class MainWindow implements ActionListener {
         AdHoc.setText("Aantal AdHocCars: " + String.valueOf(model.getAdHoc()));
         Pass.setText("Aantal ParkingPassCars: " + String.valueOf(model.getPass()));
         Abbo.setText("Aantal AbboCars: " + String.valueOf(model.getAbbo()));
-        Opbrengst.setText("Totaal Opbrengst: € " + String.valueOf(model.getOpbrengst())+ ",-");
-        Tijd.setText("Aantal Minuten: " + String.valueOf(model.getTime()));
+        Opbrengst.setText("Totaal Opbrengst:  " + String.valueOf(model.getOpbrengst())+ ",-");
+        Tijd.setText("Dagen: " +" " + String.valueOf(model.getDag()) + " " + "Uren: " + " " + String.valueOf(model.getUur()) + " " + "Minuten: " + " " + String.valueOf(model.getMinuut()));
     }
     
 	public int getNumberOfFloors() {
