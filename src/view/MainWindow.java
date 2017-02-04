@@ -18,9 +18,9 @@ import javax.swing.JPanel;
  */
 
 public class MainWindow implements ActionListener {
-    //extends JFrame
-
-    private CarParkView carParkView;
+	//extends JFrame
+	
+	private CarParkView carParkView;
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfPlaces;
@@ -31,6 +31,7 @@ public class MainWindow implements ActionListener {
     private ActionEvent event;
 
     private JPanel buttonbar;
+    private JPanel buttonbar2;
     private JPanel infobar;
     private JPanel geldbar;
 
@@ -39,153 +40,172 @@ public class MainWindow implements ActionListener {
     private JLabel Pass;
     private JLabel Abbo;
 
-    private JLabel opbrengst;
+    private JLabel Opbrengst;
+    private JLabel Tijd;
 
     public MainWindow(int numberOfFloors, int numberOfRows, int numberOfPlaces, Model model) {
-        mainwindow=new JFrame("GarageSimulator");
-
+    	mainwindow=new JFrame("GarageSimulator");
+    	
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
-        this.numberOfOpenSpots = numberOfFloors*numberOfRows*numberOfPlaces;
-
+        this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
+        
         this.model = model;
         Controller controller = new Controller(model);
-
+        
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-
+        
         carParkView = new CarParkView(this);
 
-
-
+        this.buttonbar2 = new JPanel();
+        buttonbar2.setLayout(new GridLayout(1, 0));
+        
         this.buttonbar = new JPanel();
         buttonbar.setLayout(new GridLayout(1, 0));
-
+        
         this.infobar = new JPanel();
         infobar.setLayout(new GridLayout(1,0));
-
+        
         this.geldbar = new JPanel();
         geldbar.setLayout(new GridLayout(1, 0));
 
+        mainwindow.getContentPane().add(buttonbar2);
         mainwindow.getContentPane().add(buttonbar);
         mainwindow.getContentPane().add(infobar);
         mainwindow.getContentPane().add(geldbar);
-
-
+        
+        
         Container contentPane = mainwindow.getContentPane();
-
-
-        JButton start = new JButton("start");
+        
+       
+        JButton start = new JButton("Start");
         start.addActionListener(this);
-
-        JButton step = new JButton("step");
+        
+        JButton step = new JButton("Minuut");
         step.addActionListener(this);
-
-        JButton pause = new JButton("pause");
+        
+        JButton steps = new JButton("Uur");
+        steps.addActionListener(this);
+        
+        JButton pause = new JButton("Pauze");
         pause.addActionListener(this);
-
-        JButton quit = new JButton("quit");
+        
+        JButton quit = new JButton("Stop");
         quit.addActionListener(this);
-
-        buttonbar.add(start);
+        
+        buttonbar2.add(start);
+        
         buttonbar.add(step);
+        buttonbar.add(steps);
         buttonbar.add(pause);
         buttonbar.add(quit);
-
+        
+        
+        
         Cars = new JLabel("Totaalaantal Cars");
         Cars.setHorizontalAlignment(SwingConstants.CENTER);
         Cars.setText(String.valueOf(model.getCars()));
-
+        
         AdHoc = new JLabel("aantal AdHocCars");
         AdHoc.setHorizontalAlignment(SwingConstants.CENTER);
         AdHoc.setText(String.valueOf(model.getAdHoc()));
-
+        
         Pass = new JLabel("Aantal ParkingPassCars");
         Pass.setHorizontalAlignment(SwingConstants.CENTER);
         Pass.setText(String.valueOf(model.getPass()));
-
+        
         Abbo = new JLabel("Aantal AbboCars");
         Abbo.setHorizontalAlignment(SwingConstants.CENTER);
         Abbo.setText(String.valueOf(model.getAbbo()));
-
-        opbrengst = new JLabel("Totaal Opbrengst");
-        opbrengst.setHorizontalAlignment(SwingConstants.CENTER);
-        opbrengst.setText(String.valueOf(model.getOpbrengst()));
-
+        
+        Opbrengst = new JLabel("Totaal Opbrengst");
+        Opbrengst.setHorizontalAlignment(SwingConstants.CENTER);
+        Opbrengst.setText(String.valueOf(model.getOpbrengst()));
+        
+        Tijd = new JLabel("Tijd");
+        Tijd.setHorizontalAlignment(SwingConstants.CENTER);
+        Tijd.setText(String.valueOf(model.getOpbrengst()));
+        
         infobar.add(Cars);
         infobar.add(AdHoc);
         infobar.add(Pass);
         infobar.add(Abbo);
-
-        geldbar.add(opbrengst);
-
-
-        JPanel flow = new JPanel(new GridLayout(0,1));
+        
+        geldbar.add(Opbrengst);
+        geldbar.add(Tijd);
+        
+        JPanel flow = new JPanel(new GridLayout(0,1));       
+        flow.add(buttonbar2);
         flow.add(buttonbar);
         flow.add(infobar);
         flow.add(geldbar);
         contentPane.add(carParkView, BorderLayout.NORTH);
         contentPane.add(flow, BorderLayout.SOUTH);
-
+        
         mainwindow.pack();
         mainwindow.setVisible(true);
 
         updateView();
     }
-
-
-
+ 
+   
+    
     public void setActionEvent(ActionEvent e) {
         event = e;
     }
-
+    
     public ActionEvent getActionEvent() {
         return event;
     }
-
+    
     public void actionPerformed(ActionEvent e) {
         setActionEvent(e);
-
+        
         Thread newThread = new Thread() {
             public void run() {
-
-                ActionEvent event = getActionEvent();
+            	
+                ActionEvent event = getActionEvent();                
                 String command = event.getActionCommand();
-
-                if (command == "start") {
-                    model.start();
+                
+                if (command == "Start") {
+                	model.start();                    
                 }
-
-                if(command == "pause") {
-                    model.pause();
+                
+                if(command == "Pauze") {
+                	model.pause();                    
                 }
-
-                if(command == "step") {
-
-                    model.step();
+                
+                if(command == "Minuut") {
+                	
+                	model.step();                    
                 }
-
-                if (command == "quit") {
-                    model.quit();
+                
+                if(command == "Uur") {
+                	
+                	model.uur();                    
                 }
-            }
-        };
-        newThread.start();
+                                                   
+                if (command == "Stop") {
+                	model.quit();                                        
+                }                
+            }          
+        };        
+        newThread.start();    
     }
-
+    
     public void updateView() {
         carParkView.updateView();
-
-
+        
         Cars.setText("Totaalaantal Cars: " + String.valueOf(model.getCars()));
         AdHoc.setText("Aantal AdHocCars: " + String.valueOf(model.getAdHoc()));
         Pass.setText("Aantal ParkingPassCars: " + String.valueOf(model.getPass()));
         Abbo.setText("Aantal AbboCars: " + String.valueOf(model.getAbbo()));
-        opbrengst.setText("Totaal Opbrengst: € " + String.valueOf(model.getOpbrengst())+ ",-");
-
+        Opbrengst.setText("Totaal Opbrengst: € " + String.valueOf(model.getOpbrengst())+ ",-");
+        Tijd.setText("Aantal Minuten: " + String.valueOf(model.getTime()));
     }
-
-    public int getNumberOfFloors() {
+    
+	public int getNumberOfFloors() {
         return numberOfFloors;
     }
 
@@ -198,9 +218,9 @@ public class MainWindow implements ActionListener {
     }
 
     public int getNumberOfOpenSpots(){
-        return numberOfOpenSpots;
+    	return numberOfOpenSpots;
     }
-
+    
     public Car getCarAt(Location location) {
         if (!locationIsValid(location)) {
             return null;
