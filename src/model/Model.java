@@ -1,5 +1,5 @@
 package model;
-
+import java.awt.*;
 
 import java.util.Random;
 
@@ -22,15 +22,20 @@ public class Model {
     private int day = 0;
     private int hour = 0;
     private int minute = 0;
+    
+    private int aantalCars = 0;
+    private int aantalAdHoc = 0;
+    private int aantalPass = 0;
+    private int aantalAbbo = 0;
 
-    private int tickPause = 250;
+    private int tickPause = 300;
 
     int weekDayArrivals= 100; // average number of arriving cars per hour
     int weekendArrivals = 200; // average number of arriving cars per hour
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
-    int weekendPassArrivals = 5; // average number of arriving cars per hour
-    int weekDayAbboArrivals = 20;//average number of arriving cars per hour
-    int weekendAbboArrivals = 3;//average number of arriving cars per hour
+    int weekendPassArrivals = 10; // average number of arriving cars per hour
+    int weekDayAbboArrivals = 25;//average number of arriving cars per hour
+    int weekendAbboArrivals = 5;//average number of arriving cars per hour
     int enterSpeed = 2; // number of cars that can enter per minute
     int paymentSpeed = 5; // number of cars that can pay per minute
     int exitSpeed = 3; // number of cars that can leave per minute
@@ -43,7 +48,23 @@ public class Model {
         entranceAbboQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
-        simulatorView = new MainWindow(3, 6, 30, this); // mogelijk naar main????? in run package?
+        simulatorView = new MainWindow(3, 6, 30, this);     
+    }
+    
+    public int getCars(){
+    	return aantalCars;
+    }
+    
+    public int getAdHoc(){
+    	return aantalAdHoc;
+    }
+    
+    public int getPass(){
+    	return aantalPass;
+    }
+    
+    public int getAbbo(){
+    	return aantalAbbo;
     }
     
     public void start(){
@@ -69,7 +90,7 @@ public class Model {
     }
     
     public void step(){
-    	pause();
+    	
     	for(int i = 0; i < 1; i++){
     		tick();
     	}
@@ -144,9 +165,30 @@ public class Model {
     			simulatorView.getNumberOfOpenSpots()>0 && 
     			i<enterSpeed) {
             Car car = queue.removeCar();
-            Location freeLocation = simulatorView.getFirstFreeLocation();
-            simulatorView.setCarAt(freeLocation, car);
-            i++;
+            
+            if(car.getColor() == Color.red){
+            	Location vrijePlek = simulatorView.getFirstFreeLocation();
+            	simulatorView.setCarAt(vrijePlek, car);
+            	aantalCars++;
+            	aantalAdHoc++;
+            }
+            
+            if(car.getColor() == Color.blue){
+            	Location vrijePlek = simulatorView.getFirstFreeLocation();
+            	simulatorView.setCarAt(vrijePlek, car);
+            	aantalCars++;
+            	aantalPass++;
+            }
+            
+            if(car.getColor() == Color.green){
+            	Location vrijePlek = simulatorView.getFirstFreeLocation();
+            	simulatorView.setCarAt(vrijePlek, car);
+            	aantalCars++;
+            	aantalAbbo++;
+            }
+            // Location location = simulatorView.getFirstFreeLocation();
+            //simulatorView.setCarAt(freeLocation, car);
+            //i++;
         }
     }
     
@@ -182,6 +224,7 @@ public class Model {
     	while (exitCarQueue.carsInQueue()>0 && i < exitSpeed){
             exitCarQueue.removeCar();
             i++;
+            aantalCars--;
     	}	
     }
     
