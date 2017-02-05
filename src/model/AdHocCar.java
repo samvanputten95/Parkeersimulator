@@ -1,5 +1,11 @@
 package model;
 
+//package Parkeersimulator;
+/*
+ * Author Par-Kings
+ * Version 2017.1.25
+ */
+
 import java.util.Random;
 import java.awt.*;
 
@@ -13,7 +19,14 @@ public class AdHocCar extends Car {
         this.setHasToPay(true);
     }
     
+/*
+* @param stayMinutes
+*/
+	
     public Color getColor(){
     	return COLOR;
     }
+/*
+ * @return COLOR
+ */
 }
