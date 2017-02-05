@@ -58,6 +58,7 @@ public class MainWindow implements ActionListener {
         
         carParkView = new CarParkView(this);
 
+        //buttons geadd zodat hier gebruik van gemaakt kan worden
         this.buttonbar2 = new JPanel();
         buttonbar2.setLayout(new GridLayout(1, 0));
         
@@ -78,7 +79,7 @@ public class MainWindow implements ActionListener {
         
         Container contentPane = mainwindow.getContentPane();
         
-       
+       //knoppen voor verschillende functies
         JButton start = new JButton("Start");
         start.addActionListener(this);
         
@@ -93,45 +94,51 @@ public class MainWindow implements ActionListener {
         
         JButton quit = new JButton("Stop");
         quit.addActionListener(this);
-        
+
+        //labels geadd zodat hier gebruik van gemaakt kan worden
         buttonbar2.add(start);
-        
         buttonbar.add(step);
         buttonbar.add(steps);
         buttonbar.add(pause);
         buttonbar.add(quit);
         
         
-        
+        //Label voor "Totaalaantal Cars"
         Cars = new JLabel("Totaalaantal Cars");
         Cars.setHorizontalAlignment(SwingConstants.CENTER);
         Cars.setText(String.valueOf(model.getCars()));
-        
+
+        //Label voor "aantal AdHocCars"
         AdHoc = new JLabel("aantal AdHocCars");
         AdHoc.setHorizontalAlignment(SwingConstants.CENTER);
         AdHoc.setText(String.valueOf(model.getAdHoc()));
-        
+
+        //Label voor "Aantal parkingPassCars"
         Pass = new JLabel("Aantal ParkingPassCars");
         Pass.setHorizontalAlignment(SwingConstants.CENTER);
         Pass.setText(String.valueOf(model.getPass()));
-        
+
+        //Label voor "Aantal AbboCars"
         Abbo = new JLabel("Aantal AbboCars");
         Abbo.setHorizontalAlignment(SwingConstants.CENTER);
         Abbo.setText(String.valueOf(model.getAbbo()));
-        
+
+        //Label voor "Totaal Opbrengst"
         Opbrengst = new JLabel("Totaal Opbrengst");
         Opbrengst.setHorizontalAlignment(SwingConstants.CENTER);
         Opbrengst.setText(String.valueOf(model.getOpbrengst()));
-        
+
+        //Label voor "Totaal Opbrengst"
         Tijd = new JLabel("Tijd");
         Tijd.setHorizontalAlignment(SwingConstants.CENTER);
         Tijd.setText(String.valueOf(model.getOpbrengst()));
-        
+
+        //labels geadd zodat hier gebruik van gemaakt kan worden
         infobar.add(Cars);
         infobar.add(AdHoc);
         infobar.add(Pass);
         infobar.add(Abbo);
-        
+
         geldbar.add(Opbrengst);
         geldbar.add(Tijd);
         
@@ -161,7 +168,8 @@ public class MainWindow implements ActionListener {
     
     public void actionPerformed(ActionEvent e) {
         setActionEvent(e);
-        
+
+        //nieuwe Threads gemaakt
         Thread newThread = new Thread() {
             public void run() {
             	
@@ -193,7 +201,7 @@ public class MainWindow implements ActionListener {
         };        
         newThread.start();    
     }
-    
+    //Text voor verschillende GUI functies
     public void updateView() {
         carParkView.updateView();
         
@@ -255,7 +263,7 @@ public class MainWindow implements ActionListener {
         numberOfOpenSpots++;
         return car;
     }
-
+//laat auto's naar bepaalde plek gaan
     public Location getFirstFreeLocation() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
@@ -269,7 +277,7 @@ public class MainWindow implements ActionListener {
         }
         return null;
     }
-
+    //let op leaving cars
     public Car getFirstLeavingCar() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
@@ -298,7 +306,7 @@ public class MainWindow implements ActionListener {
             }
         }
     }
-
+    //kijkt location valid is
     private boolean locationIsValid(Location location) {
         int floor = location.getFloor();
         int row = location.getRow();
